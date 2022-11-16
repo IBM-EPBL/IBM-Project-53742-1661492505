@@ -1,44 +1,0 @@
-o
-    ^Pmc`  ã                   @   sÆ   d dl mZmZmZmZmZmZ d dl Z eeƒZ	de	_
-dd„ Z
-e	j 
-d¡d d„ ƒZd	d
-„ Ze	 d
-¡dd
-„ ƒZe	 d¡dd„ ƒZe	jddddd„ ƒZe	jddddd„ ƒZedkrae	jdd dS dS )é    )ÚFlaskÚrender_templateÚ requestÚredirectÚ url_forÚflashNZ69420c                  C   sN   t  d¡} tddƒ}|  | ¡ ¡ W d   ƒ n1 sw   Y  |  ¡  d S )Núusers.dbz
-schema.sqlÚr)Ú sqlite3Ú connectÚopenZ
-executescriptÚreadÚcommit)ÚdbZschema© r   ú;C:\Users\Admin\Downloads\Assignment -2\with-database\app.pyÚ init_db   s
-   
-ÿr   Zinitdbc                   C   s   t ƒ  tdƒ d S )NzInitialised database.)r   Úprintr   r   r   r   Ú
-initdb_cmd   s   r   c                  C   s   t  d¡} t j| _| S )Nr   )r
-   r
-   ZRowZ
-row_factory)Úconnr   r   r   Úget_db   s   
-r   ú/c                   C   ó   t dddS )Nú
-index.htmlÚHome©Útitle©r   r   r   r   r   Úindex   ó   r   z/aboutc                   C   r   )Nz
-about.htmlZAboutr   r   r   r   r   r   Úabout   r   r    z /signin)ÚGETÚPOST)Ú methodsc                  C   s’   d } t jdkrBt jd }t jd }tƒ }| d|f¡ ¡ }|d u r$d} n||d kr0t|ƒ d} | d u r:t td ƒƒS t	| ƒ | 
-¡  t
-dd	| d
-S )
-Nr"   ÚusernameÚpasswordz-SELECT password FROM users WHERE username = ?zIncorrect Username/Password.zIncorrect Password.r    z
-signin.htmlz Sign In)r   Úerror)r   ÚmethodÚformr   Ú executeZfetchoner   r   r   r    Úcloser   )r&   r$   r%   r   Úuserr   r   r   Úsignin"   s(   
-
-
-ÿþr,   z /signup)r"   r!   c                   C   s†   t jdkr=t jd } t jd }t jd }t jd }tƒ }| ¡ }| d| |||f¡ | ¡  |  ¡  |  ¡  td dd	d
-S td
-dd
-S )Nr"   r$   r%   ÚemailÚnamezHINSERT INTO users (username, password, email, name) VALUES (?, ?, ?, ?);r   r   zRegistration Successfull!)r   Zsuccz
-signup.htmlz Sign Upr   )	r   r'   r(   r   Úcursorr)   r   r*   r   )r$   r%   r-   r.   r   Úcurrr   r   r   Úsignup;   s   
-
-
-
-
-ÿr1   Z __app__T)Údebug)Úflaskr   r   r   r   r   r    r
-   Ú__name__ÚappÚ
-secret_keyr   ÚcliÚ commandr   r   Úrouter   r    r,   r1   Úrunr   r   r   r   Ú<module>   s&     
-
-
-
-
-
-ÿ
